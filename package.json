@@ -1,0 +1,25 @@
+{
+  "name": "stagync-storage-memory",
+  "version": "0.0.1",
+  "description": "Plugin for stagync to save data in memory",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "author": "Philippe Assis <assis@sophiware.com>",
+  "license": "ISC",
+  "dependencies": {
+    "deepmerge": "^2.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.1",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.10.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
+}
