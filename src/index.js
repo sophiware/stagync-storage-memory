@@ -1,7 +1,7 @@
 import merge from 'deepmerge'
 var __CACHE = {}
 
-export default {
+export default class Memory {
   removeItem (item, callback) {
     if (__CACHE[item]) {
       delete __CACHE[item]
@@ -12,7 +12,8 @@ export default {
     }
 
     return null
-  },
+  }
+
   getItem (item, callback) {
     const result = item ? __CACHE[item] : __CACHE
 
@@ -21,7 +22,8 @@ export default {
     }
 
     return result
-  },
+  }
+
   setItem (item, value, callback) {
     __CACHE[item] = value
 
@@ -30,7 +32,8 @@ export default {
     }
 
     return true
-  },
+  }
+
   mergeItem (item, value, callback) {
     __CACHE[item] = merge(__CACHE[item], JSON.parse(value))
 
@@ -39,7 +42,8 @@ export default {
     }
 
     return true
-  },
+  }
+
   clear () {
     __CACHE = {}
     return true
