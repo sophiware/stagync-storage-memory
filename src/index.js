@@ -28,14 +28,10 @@ export default class Memory {
 
   setItem(item, value, callback) {
     if (__CACHE[item] === undefined) {
-      console.log('set', value)
       __CACHE[item] = value
     } else {
-      console.log('merge', value)
       __CACHE[item] = merge(__CACHE[item], value)
     }
-
-    console.log(__CACHE[item])
 
     if (callback) {
       return callback(null, true)
