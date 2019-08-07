@@ -9,7 +9,7 @@
   "author": "Philippe Assis <assis@sophiware.com>",
   "license": "ISC",
   "dependencies": {
-    "deepmerge": "^2.0.0"
+    "deepmerge": "^2.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

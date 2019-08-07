@@ -1,9 +1,10 @@
-var __CACHE = {}
+const deepmerge = require('deepmerge')
+const localCache = {}
 
 export default class Memory {
   removeItem (item, callback) {
-    if (__CACHE[item]) {
-      delete __CACHE[item]
+    if (localCache[item]) {
+      delete localCache[item]
     }
 
     if (callback) {
@@ -14,7 +15,7 @@ export default class Memory {
   }
 
   getItem (item, callback) {
-    const result = item ? __CACHE[item] : __CACHE
+    const result = item ? localCache[item] : localCache
 
     if (callback) {
       return callback(null, result)
@@ -24,7 +25,11 @@ export default class Memory {
   }
 
   setItem (item, value, callback) {
-    __CACHE[item] = value
+    if (!localCache[item]) {
+      localCache[item] = value
+    } else {
+      localCache[item] = deepmerge(localCache[item], value)
+    }
 
     if (callback) {
       return callback(null, true)
@@ -34,7 +39,10 @@ export default class Memory {
   }
 
   clear () {
-    __CACHE = {}
+    for (let key in localCache) {
+      delete localCache[key]
+    }
+
     return true
   }
 }
