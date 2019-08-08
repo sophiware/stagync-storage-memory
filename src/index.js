@@ -2,48 +2,52 @@ const localCache = {}
 
 export default class Memory {
   removeItem (item, callback) {
-    if (localCache[item]) {
-      delete localCache[item]
-    }
+    try {
+      if (localCache[item]) {
+        delete localCache[item]
+      }
 
-    if (callback) {
-      callback(null)
+      if (callback) {
+        return callback(null, true)
+      }
+    } catch (err) {
+      return callback(err)
     }
-
-    return null
   }
 
   getItem (item, callback) {
-    const result = item ? localCache[item] : localCache
-
-    if (callback) {
-      return callback(null, result)
+    try {
+      return callback(null, localCache[item] || null)
+    } catch (err) {
+      return callback(err)
     }
-
-    return result
   }
 
   setItem (item, value, callback) {
-    if (!localCache[item]) {
-      localCache[item] = value
-    } else {
-      for (let key in value){
-        localCache[item][key] = value[key]
+    try {
+      if (!localCache[item]) {
+        localCache[item] = value
+      } else {
+        for (let key in value) {
+          localCache[item][key] = value[key]
+        }
       }
-    }
 
-    if (callback) {
-      return callback(null, true)
+      callback(null, localCache[item])
+    } catch (err) {
+      return callback(err)
     }
-
-    return true
   }
 
-  clear () {
-    for (let key in localCache) {
-      delete localCache[key]
-    }
+  clear (callback) {
+    try {
+      for (let key in localCache) {
+        delete localCache[key]
+      }
 
-    return true
+      callback(null, true)
+    } catch (err) {
+      callback(err)
+    }
   }
 }
