@@ -1,4 +1,3 @@
-const deepmerge = require('deepmerge')
 const localCache = {}
 
 export default class Memory {
@@ -28,7 +27,9 @@ export default class Memory {
     if (!localCache[item]) {
       localCache[item] = value
     } else {
-      localCache[item] = deepmerge(localCache[item], value)
+      for (let key in value){
+        localCache[item][key] = value[key]
+      }
     }
 
     if (callback) {
